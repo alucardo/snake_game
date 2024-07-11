@@ -1,6 +1,9 @@
 from turtle import Turtle
+import time
 
+MOVE_TIME = 0.1
 MOVE_DISTANCE = 20
+FOOD_COLLISION_DISTANCE = 15
 UP = 90
 DOWN = 270
 LEFT = 180
@@ -26,6 +29,7 @@ class Snake():
 
     def move(self):
         limit = len(self.segments) - 1
+        time.sleep(0.1)
         for seg_num in range(limit, 0, -1):
             new_x = self.segments[seg_num - 1].xcor()
             new_y = self.segments[seg_num - 1].ycor()
@@ -47,3 +51,20 @@ class Snake():
     def left(self):
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
+
+    def food_collision(self, object):
+        if self.head.distance(object) < FOOD_COLLISION_DISTANCE:
+            self.game_screen.refresh_score()
+            self.add_segment()
+            return True
+        else:
+            return False
+
+    def add_segment(self):
+        new_segment = Turtle('square')
+        new_segment.color('white')
+        new_segment.penup()
+        x = self.head.xcor()
+        y = self.head.ycor()
+        new_segment.goto(x, y)
+        self.segments.append(new_segment)
