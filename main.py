@@ -15,4 +15,9 @@ while game_is_on:
     if snake.food_collision(food):
         food.refresh()
         scoreboard.increase_score()
+
+    if snake.wall_collision():
+        game_is_on = False
+        scoreboard.game_over()
+
 game_screen.exit_game()

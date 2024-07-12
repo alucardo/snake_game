@@ -59,6 +59,11 @@ class Snake():
         else:
             return False
 
+    def wall_collision(self):
+        head_x = self.head.xcor()
+        head_y = self.head.ycor()
+        return head_x > 280 or head_x < -280 or head_y > 280 or head_y < -280
+
     def add_segment(self):
         new_segment = Turtle('square')
         new_segment.color('white')
