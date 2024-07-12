@@ -5,10 +5,9 @@ class GameScreen():
 
     def __init__(self):
         self.screen = Screen()
-        self.score = -1
         self.screen.setup(width=600, height=600)
         self.screen.bgcolor('black')
-        self.refresh_score()
+        self.screen.title(f"Snake Game")
         self.screen.tracer(0)
         self.screen.listen()
 
@@ -36,7 +35,3 @@ class GameScreen():
     def key_right(self, action):
         self.screen.onkey(action, "Right")
         self.screen.onkey(action, "d")
-
-    def refresh_score(self):
-        self.score += 1
-        self.screen.title(f"Score: {self.score}")

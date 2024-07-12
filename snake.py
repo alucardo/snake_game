@@ -54,7 +54,6 @@ class Snake():
 
     def food_collision(self, object):
         if self.head.distance(object) < FOOD_COLLISION_DISTANCE:
-            self.game_screen.refresh_score()
             self.add_segment()
             return True
         else:
