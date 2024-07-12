@@ -77,10 +77,7 @@ class Snake():
         return head_x > 280 or head_x < -280 or head_y > 280 or head_y < -280
 
     def tail_collision(self):
-        for segment in self.segments:
-            if segment == self.head:
-                pass
-            else:
-                if segment.distance(self.head) < 10:
-                    return True
+        for segment in self.segments[1:]:
+            if segment.distance(self.head) < 10:
+                return True
         return False
