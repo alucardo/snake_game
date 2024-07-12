@@ -16,7 +16,7 @@ while game_is_on:
         food.refresh()
         scoreboard.increase_score()
 
-    if snake.wall_collision():
+    if snake.wall_collision() or snake.tail_collision():
         game_is_on = False
         scoreboard.game_over()
 

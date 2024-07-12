@@ -22,10 +22,22 @@ class Snake():
 
     def create_snake(self):
         for i in range(3):
-            self.segments.append(Turtle('square'))
-            self.segments[i].color('white')
-            self.segments[i].penup()
-            self.segments[i].goto(-(i * MOVE_DISTANCE), 0)
+            new_segment = self.build_segment()
+            new_segment.goto(-(i * MOVE_DISTANCE), 0)
+            self.segments.append(new_segment)
+
+    def build_segment(self):
+        segment = Turtle('square')
+        segment.color('white')
+        segment.penup()
+        return segment
+
+    def add_segment(self):
+        new_segment = self.build_segment()
+        position = self.segments[-1].position()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
 
     def move(self):
         limit = len(self.segments) - 1
@@ -64,11 +76,11 @@ class Snake():
         head_y = self.head.ycor()
         return head_x > 280 or head_x < -280 or head_y > 280 or head_y < -280
 
-    def add_segment(self):
-        new_segment = Turtle('square')
-        new_segment.color('white')
-        new_segment.penup()
-        x = self.head.xcor()
-        y = self.head.ycor()
-        new_segment.goto(x, y)
-        self.segments.append(new_segment)
+    def tail_collision(self):
+        for segment in self.segments:
+            if segment == self.head:
+                pass
+            else:
+                if segment.distance(self.head) < 10:
+                    return True
+        return False
